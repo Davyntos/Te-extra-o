@@ -1,0 +1,110 @@
+/* ==========================================
+   1. ESTILOS GENERALES Y FONDO ANIMADO
+   ========================================== */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* Degradado pastel (rosa y blanco) que cubre toda la pantalla */
+    background: linear-gradient(-45deg, #FFC0CB, #FFB6C1, #FFFFFF, #FFB6C1);
+    background-size: 400% 400%;
+    
+    /* Aplica la animación del fondo de forma infinita */
+    animation: gradientAnimation 10s ease infinite;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Evita que aparezcan barras de scroll */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Animación para lograr que el fondo degradado se mueva suavemente */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================================
+   2. BOTÓN CENTRAL "I LOVE YOU" (BRINCANDO)
+   ========================================== */
+.message {
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    padding: 20px 40px;
+    border-radius: 50px; /* Bordes completamente redondeados */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Sombra suave para dar relieve */
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff4d6d; /* Color rosa/cereza intenso para las letras */
+    cursor: pointer;
+    z-index: 10; /* Asegura que el botón siempre esté por encima de los mensajes flotantes */
+    
+    /* Transición suave para cuando pasas el mouse por encima */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Aplica la animación de brinco continuo */
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+/* Animación de rebote (brinco) */
+@keyframes bounce {
+    0%, 100% { 
+        transform: translateY(0); 
+    }
+    50% { 
+        transform: translateY(-12px); /* Altura del brinco */
+    }
+}
+
+/* Efectos visuales cuando el usuario pasa el cursor sobre el botón */
+.message:hover {
+    transform: scale(1.1); /* Se agranda un poquito */
+    box-shadow: 0px 12px 25px rgba(255, 77, 109, 0.3); /* Brillo rosa en la sombra */
+    animation-play-state: paused; /* Detiene el brinco temporalmente al interactuar */
+}
+
+/* ==========================================
+   3. MENSAJES FLOTANTES ALEATORIOS (.hearts)
+   ========================================== */
+.hearts {
+    position: absolute;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e63946; /* Color rojo/rosa para los textos flotantes */
+    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+    pointer-events: none; /* Hace que los textos sean "intocables" para no interferir con los clics */
+    z-index: 1;
+    
+    /* Sombra blanca detrás del texto para que se lea perfectamente sobre cualquier color de fondo */
+    text-shadow: 
+        2px 2px 4px rgba(255, 255, 255, 0.9), 
+       -2px -2px 4px rgba(255, 255, 255, 0.9); 
+}
+/* ==========================================
+   4. ANIMACIÓN DE CORAZONES CAYENDO
+   ========================================== */
+.falling-heart {
+    position: absolute;
+    top: -50px; /* Empiezan justo arriba, fuera de la pantalla */
+    z-index: 2; /* Por encima del fondo, por debajo del botón principal */
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        /* Caen hasta pasar el fondo de la pantalla y rotan un poco */
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}

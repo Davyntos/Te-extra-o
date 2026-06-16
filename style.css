@@ -29,20 +29,22 @@ body {
 }
 
 /* ==========================================
-   2. BOTÓN CENTRAL "I LOVE YOU" (BRINCANDO)
+   2. BOTÓN CENTRAL "I LOVE YOU" (RESPONSIVO)
    ========================================== */
 .message {
     background: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
-    padding: 20px 40px;
+    padding: 15px 30px; /* Tamaño adaptado para pantallas estándar y móviles */
     border-radius: 50px; /* Bordes completamente redondeados */
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Sombra suave para dar relieve */
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
     color: #ff4d6d; /* Color rosa/cereza intenso para las letras */
     cursor: pointer;
     z-index: 10; /* Asegura que el botón siempre esté por encima de los mensajes flotantes */
+    text-align: center;
+    max-width: 80%; /* Evita que el botón toque los bordes en celulares */
     
-    /* Transición suave para cuando pasas el mouse por encima */
+    /* Transición suave para cuando pasas el mouse o presionas */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     
     /* Aplica la animación de brinco continuo */
@@ -55,15 +57,15 @@ body {
         transform: translateY(0); 
     }
     50% { 
-        transform: translateY(-12px); /* Altura del brinco */
+        transform: translateY(-10px); /* Altura del brinco */
     }
 }
 
-/* Efectos visuales cuando el usuario pasa el cursor sobre el botón */
+/* Efectos visuales al interactuar con el botón */
 .message:hover {
-    transform: scale(1.1); /* Se agranda un poquito */
+    transform: scale(1.05); /* Se agranda un poquito */
     box-shadow: 0px 12px 25px rgba(255, 77, 109, 0.3); /* Brillo rosa en la sombra */
-    animation-play-state: paused; /* Detiene el brinco temporalmente al interactuar */
+    animation-play-state: paused; /* Detiene el brinco temporalmente */
 }
 
 /* ==========================================
@@ -71,18 +73,19 @@ body {
    ========================================== */
 .hearts {
     position: absolute;
-    font-size: 16px;
+    font-size: 14px; /* Tamaño base ideal */
     font-weight: 600;
     color: #e63946; /* Color rojo/rosa para los textos flotantes */
     white-space: nowrap; /* Evita que el texto se parta en dos líneas */
-    pointer-events: none; /* Hace que los textos sean "intocables" para no interferir con los clics */
+    pointer-events: none; /* Hace que los textos sean intocables */
     z-index: 1;
     
-    /* Sombra blanca detrás del texto para que se lea perfectamente sobre cualquier color de fondo */
+    /* Sombra blanca detrás del texto para que se lea perfectamente sobre el fondo */
     text-shadow: 
         2px 2px 4px rgba(255, 255, 255, 0.9), 
        -2px -2px 4px rgba(255, 255, 255, 0.9); 
 }
+
 /* ==========================================
    4. ANIMACIÓN DE CORAZONES CAYENDO
    ========================================== */
@@ -103,8 +106,21 @@ body {
         opacity: 1;
     }
     100% {
-        /* Caen hasta pasar el fondo de la pantalla y rotan un poco */
         transform: translateY(105vh) rotate(360deg);
         opacity: 0;
+    }
+}
+
+/* ==========================================
+   📱 AJUSTES EXCLUSIVOS PARA PANTALLAS MÓVILES
+   ========================================== */
+@media (max-width: 480px) {
+    .message {
+        font-size: 20px; /* Letra del botón un poco más chica en celular */
+        padding: 12px 24px;
+    }
+
+    .hearts {
+        font-size: 11px; /* Reduce el tamaño de los textos flotantes para que quepan bien */
     }
 }
